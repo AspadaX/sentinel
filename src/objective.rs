@@ -16,8 +16,16 @@ pub struct Objective {
 }
 
 impl Objective {
+    pub fn from_file_default(filepath: Option<&str>) -> Result<Self> {
+        if let Some(filepath) = filepath {
+            return Ok(Objective::from_file(filepath)?);
+        }
+        
+        Ok(Objective::from_file("./")?)
+    }
+    
     /// Load the `Objective` from an objective.json file
-    pub fn from_file(filepath: &str) -> Result<Self> {
+    fn from_file(filepath: &str) -> Result<Self> {
         Ok(
             serde_json::from_slice(&read_binary(filepath))?
         )
