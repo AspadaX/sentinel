@@ -1,4 +1,7 @@
 mod arguments;
+mod diff;
+mod objective;
+mod utilities;
 
 use anyhow::{Error, Result};
 use arguments::{Arguments, Commands};
