@@ -12,6 +12,7 @@ use clap::{Parser, crate_authors, crate_description, crate_name, crate_version};
 use environment_variables::EnvironmentVariables;
 use objective::Objective;
 use secretary::openai::OpenAILLM;
+use utilities::process_run_arguments_objective_filepath;
 
 fn main() -> Result<(), Error> {
     let arguments = Arguments::parse();
@@ -26,7 +27,12 @@ fn main() -> Result<(), Error> {
 
     match arguments.commands {
         Commands::Run(subcommand) => {
-            let objective_data_content = 
+            let result: String = process_run_arguments_objective_filepath(
+                llm, 
+                Objective::from_file_default(subcommand.objective_filepath.as_deref())?
+            )?;
+            
+            println!("{}", result);
         },
         Commands::Generate(subcommand) => {},
         Commands::Version(_) => {

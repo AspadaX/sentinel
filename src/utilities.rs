@@ -14,7 +14,7 @@ pub fn process_run_arguments_objective_filepath(
     );
     
     // Get the objective.json content as well as the git diff output
-    let target = format!(
+    let target: String = format!(
         "Requrements:\n{}\nCode:\n{}", 
         objective_file_data, get_codebase_git_diff()?
     );

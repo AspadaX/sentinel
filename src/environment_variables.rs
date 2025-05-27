@@ -11,8 +11,8 @@ impl EnvironmentVariables {
     pub fn new() -> Result<Self> {
         Ok(
             Self { 
-                api_key: std::env::var("SENTINEL_OPENAI_API_BASE")?, 
-                api_base: std::env::var("SENTINEL_OPENAI_API_KEY")?, 
+                api_base: std::env::var("SENTINEL_OPENAI_API_BASE")?, 
+                api_key: std::env::var("SENTINEL_OPENAI_API_KEY")?, 
                 model: std::env::var("SENTINEL_OPENAI_MODEL")?
             }
         )
