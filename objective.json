@@ -1,6 +1,8 @@
 {
   "main_objective": "Use LLM to check if the code logic fits the request",
   "objectives": [
-    "fix the error encountered when calling the LLM due to the wrong positioning of the env vars"
+    "optimize the system prompt. allow the llm to leave empty array when no issues are spotted.",
+    "optimize the way the diagnosis output is shown.",
+    "add a new field, suggestion, to the Objective data structure."
   ]
 }

@@ -4,12 +4,14 @@ mod objective;
 mod utilities;
 mod environment_variables;
 mod llm;
+mod display_control;
 
 use anyhow::{Error, Result};
 use arguments::{Arguments, Commands};
-use cchain::display_control::{Level, display_message};
 use clap::{Parser, crate_authors, crate_description, crate_name, crate_version};
+use display_control::{display_message, Level};
 use environment_variables::EnvironmentVariables;
+use llm::CodeLogicCheck;
 use objective::Objective;
 use secretary::openai::OpenAILLM;
 use utilities::process_run_arguments_objective_filepath;
@@ -27,12 +29,12 @@ fn main() -> Result<(), Error> {
 
     match arguments.commands {
         Commands::Run(subcommand) => {
-            let result: String = process_run_arguments_objective_filepath(
+            let result: CodeLogicCheck = process_run_arguments_objective_filepath(
                 llm, 
                 Objective::from_file_default(subcommand.objective_filepath.as_deref())?
             )?;
             
-            println!("{}", result);
+            result.display_code_logic_check_result();
         },
         Commands::Generate(subcommand) => {},
         Commands::Version(_) => {

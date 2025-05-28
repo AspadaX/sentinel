@@ -7,7 +7,7 @@ use crate::{diff::get_codebase_git_diff, llm::CodeLogicCheck, objective::Objecti
 pub fn process_run_arguments_objective_filepath(
     llm: impl GenerateJSON + IsLLM,
     objective_file_data: Objective,
-) -> Result<String> {
+) -> Result<CodeLogicCheck> {
     let task = BasicTask::new(
         CodeLogicCheck::default(), 
         vec![CodeLogicCheck::default().get_system_prompt()]
@@ -20,5 +20,5 @@ pub fn process_run_arguments_objective_filepath(
     );
     
     // send to the LLM for generation
-    Ok(llm.generate_json(&task, &target)?)
+    Ok(llm.generate_json(&task, &target)?.try_into()?)
 }
